@@ -19,21 +19,21 @@ public class main {
                 	while(!Double.TryParse(Console.ReadLine(), out a)) {
 				Console.ForegroundColor = ConsoleColor.Red;
 				Console.WriteLine("Error parsing A");
-				Console.ForegroundColor = ConsoleColor.White;
+				Console.ResetColor();
 				Console.Write("A= ");
 			}
                 	Console.Write("B= ");
                 	while(!Double.TryParse(Console.ReadLine(), out b)) {
 				Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Error parsing B");
-                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.ResetColor();
                                 Console.Write("B= ");
 			}
                 	Console.Write("C= ");
                 	while(!Double.TryParse(Console.ReadLine(), out c)) {
 				Console.ForegroundColor = ConsoleColor.Red;
                         	Console.WriteLine("Error parsing C");
-                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.ResetColor();
                                 Console.Write("C= ");
 			}
 		}
