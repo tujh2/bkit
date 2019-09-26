@@ -5,7 +5,7 @@ namespace Lab1 {
 			while(!Double.TryParse(a, out b)) {
 				Console.ForegroundColor = ConsoleColor.Red;
 				if(flag)
-	                                Console.WriteLine("Error parsing param, put it from keyboard" + a);
+	                                Console.WriteLine("Error parsing param, put it from keyboard");
                                 Console.ResetColor();
 				Console.Write(name + " = ");
 				a = Console.ReadLine();
