@@ -91,6 +91,7 @@ namespace Lab1 {
 						Console.WriteLine("x1 = {0}, x2 = {1}", x3, x4);
 				}			
 			}
+			Console.Read();
 		}
 	}
 }
