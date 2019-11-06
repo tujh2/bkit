@@ -46,18 +46,17 @@
     <Compile Include="Containers\Matrix.cs" />
     <Compile Include="Containers\SimpleList.cs" />
     <Compile Include="Containers\SimpleStack.cs" />
-    <Compile Include="Figures\Circle.cs" />
-    <Compile Include="Figures\Figures.cs" />
-    <Compile Include="Figures\IComparable.cs" />
-    <Compile Include="Figures\IPrint.cs" />
-    <Compile Include="Figures\Rectangle.cs" />
-    <Compile Include="Figures\Square.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Lab2\Lab2.csproj">
+      <Project>{757985e7-d788-4819-964c-d30a9eec5768}</Project>
+      <Name>Lab2</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

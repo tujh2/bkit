@@ -1,7 +1,7 @@
 using System;
 using SimpleListProject;
 
-namespace Figures {
+namespace Containers {
 	class SimpleStack<T> : SimpleList<T> where T : IComparable {
 		public void Push(T el) {
 			Add(el);

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Figures
+namespace Containers
 {
     public class Matrix3D<T>
     {

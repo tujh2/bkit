@@ -1,7 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Figures;
+using Lab2.Figures;
+using Containers;
 
 namespace Lab3 {
 	class Program {

@@ -16,7 +16,7 @@ namespace Lab4
         private List<ItemOfList> searchResult;
         private List<string> words;
         private Stopwatch time;
-
+        private char[] delims = new char[] { '\n', '\r', ' ', '.', ',', '!', '?' };
         public MainWindow()
         {
             time = new Stopwatch();
@@ -30,7 +30,7 @@ namespace Lab4
             openFileDialog.Filter = "Text documents (.txt)|*.txt";
             if (openFileDialog.ShowDialog() == true) {
                 time.Restart();
-                data = File.ReadAllText(openFileDialog.FileName).Split(new char[] { '\n', '\r' });
+                data = File.ReadAllText(openFileDialog.FileName).Split(delims);
                 words = new List<string>();
                 foreach (string s in data) {
                     if (s.Trim() != "" && !words.Contains(s))
