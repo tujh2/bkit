@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Text;
 using System.Collections.Generic;
 using System.Windows;
 using Microsoft.Win32;
@@ -30,11 +30,10 @@ namespace Lab4
             openFileDialog.Filter = "Text documents (.txt)|*.txt";
             if (openFileDialog.ShowDialog() == true) {
                 time.Restart();
-                data = File.ReadAllText(openFileDialog.FileName).Split(delims);
+                data = File.ReadAllText(openFileDialog.FileName, Encoding.UTF8).Split(delims);
                 words = new List<string>();
                 foreach (string s in data) {
-                    if (s.Trim() != "" && !words.Contains(s))
-                    {
+                    if (s.Trim() != "" && !words.Contains(s) ) {
                         words.Add(s);
                     }
                 }
@@ -52,7 +51,7 @@ namespace Lab4
             searchResult = new List<ItemOfList>();
             time.Restart();
             foreach (string s in words) {
-                if (s.Contains(word)) {
+                if (s.ToUpper().Contains( word.ToUpper() ) ) {
                     searchResult.Add(new ItemOfList() { Word = s });
                 }
             }
