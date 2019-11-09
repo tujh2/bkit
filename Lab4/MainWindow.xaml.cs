@@ -1,9 +1,12 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Windows;
 using Microsoft.Win32;
 using System.Diagnostics;
 using System.IO;
+using Lab5;
+using System.Windows.Controls;
 
 namespace Lab4
 {
@@ -13,14 +16,18 @@ namespace Lab4
     public partial class MainWindow : Window
     {
         private string[] data;
-        private List<ItemOfList> searchResult;
-        private List<string> words;
+        private List<ItemOfList> searchResult = new List<ItemOfList>();
+        private List<ItemOfList> searchResultLev = new List<ItemOfList>();
+        private List<string> words = new List<string>();
         private Stopwatch time;
         private char[] delims = new char[] { '\n', '\r', ' ', '.', ',', '!', '?' };
+        private bool distanceFlag = true;
         public MainWindow()
         {
             time = new Stopwatch();
             InitializeComponent();
+            resultListBox.ItemsSource = searchResult;
+            resultListBox5.ItemsSource = searchResultLev;
         }
 
         private void onReadButton(object sender, RoutedEventArgs e) {
@@ -31,7 +38,7 @@ namespace Lab4
             if (openFileDialog.ShowDialog() == true) {
                 time.Restart();
                 data = File.ReadAllText(openFileDialog.FileName, Encoding.UTF8).Split(delims);
-                words = new List<string>();
+                words.Clear();
                 foreach (string s in data) {
                     if (s.Trim() != "" && !words.Contains(s) ) {
                         words.Add(s);
@@ -44,11 +51,11 @@ namespace Lab4
 
         private void onSearchButton(object sender, RoutedEventArgs e) {
             string word = searchWord.Text;
-            if (words == null) {
+            if (words.Count == 0) {
                 MessageBox.Show("Read file first");
                 return;
             }
-            searchResult = new List<ItemOfList>();
+            searchResult.Clear();
             time.Restart();
             foreach (string s in words) {
                 if (s.ToUpper().Contains( word.ToUpper() ) ) {
@@ -57,7 +64,46 @@ namespace Lab4
             }
             time.Stop();
             searchTimeLabel.Content = "Search time: " + time.Elapsed.TotalMilliseconds + " ms";
-            resultListBox.ItemsSource = searchResult;
+            resultListBox.Items.Refresh();
+        }
+
+        private void onSearchButtonLevenshtain(object sender, RoutedEventArgs e) {
+            string word = searchWord.Text; int max;
+            if (words.Count == 0 || !Int32.TryParse(levMaxValue.Text, out max)) {
+                MessageBox.Show("Read file first or wrong MaxValue");
+                return;
+            }
+            searchResultLev.Clear();
+            time.Restart();
+            if (distanceFlag)
+            {
+                foreach (string s in words)
+                {
+                    if (LevDistance.Distance(s, word) < max)
+                        searchResultLev.Add(new ItemOfList() { Word = s });
+                }
+            }
+            else {
+                foreach (string s in words)
+                {
+                    if (LevDistance.DistanceDameray(s, word) < max)
+                        searchResultLev.Add(new ItemOfList() { Word = s });
+                }
+            }
+           
+            time.Stop();
+            searchTimeLabel5.Content = "Search time: " + time.Elapsed.TotalMilliseconds + " ms";
+            resultListBox5.Items.Refresh();
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e) {
+            RadioButton radioButton = (RadioButton)sender;
+            if (radioButton.Equals(DamerawDistance))
+            {
+                distanceFlag = false;
+            }
+            else
+                distanceFlag = true;
         }
     }
 

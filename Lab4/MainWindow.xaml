@@ -5,21 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab4"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="400">
-    <StackPanel HorizontalAlignment="Center" Margin="10">
-        <Button x:Name="readBut" Margin="5" Width="150" Height="30" Content="Read From File" Click="onReadButton"/>
-        <Label x:Name="readTimeLabel" Content="Read Time: 0"/>
-        <TextBox x:Name="searchWord" Margin="5" Height="25"></TextBox>
-        <Button x:Name="searchBut" Margin="5" Height="30" Content="Search" Click="onSearchButton"/>
-        <Label x:Name="searchTimeLabel" Content="Search time: 0" />
-        <Label Content="Search result:" />
-        <ListBox x:Name="resultListBox" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="250">
+        Title="Lab4-Lab5" Height="Auto" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Margin="5" Grid.Row="0" Grid.ColumnSpan="2">
+            <Button x:Name="readBut" Height="30" Width="200" Content="Read From File" Click="onReadButton"/>
+            <Label x:Name="readTimeLabel" Content="Read Time: 0" HorizontalAlignment="Center"/>
+            <Label Content="Enter word:"/>
+            <TextBox x:Name="searchWord" Margin="5" Height="25"></TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="1" Margin="5" VerticalAlignment="Bottom">
+            <Label Content="Lab4 search"/>
+            <Button x:Name="searchBut" Margin="5" Height="30" Width="200" Content="Search" Click="onSearchButton"/>
+            <Label x:Name="searchTimeLabel" Content="Search time: 0" />
+            <Label Content="Search result:" Grid.Column="1"/>
+        </StackPanel>
+
+        <ListBox Grid.Column="0" Grid.Row="2" x:Name="resultListBox" 
+                 ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                 Height="{Binding ElementName=LayoutRoot, Path=ActualHeight}"
+                 Margin="5">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Word}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-    </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="5" VerticalAlignment="Bottom">
+            <Label Content="Enter MaxValue"/>
+            <TextBox x:Name="levMaxValue" Height="25" Margin="5"/>
+            <RadioButton x:Name="defaultDistance" Content="Расстояние Левенштейна" IsChecked="True" Checked="RadioButton_Checked"/>
+            <RadioButton x:Name="DamerawDistance"  Content="Расстояние Дамерау—Левенштейна" Checked="RadioButton_Checked"/>
+            <Button x:Name="searchBut5" Margin="5" Height="30" Width="200" Content="Search" Click="onSearchButtonLevenshtain"/>
+            <Label x:Name="searchTimeLabel5" Content="Search time: 0" />
+            <Label Content="Search result: "/>
+        </StackPanel>
+        <ListBox x:Name="resultListBox5" Grid.Row="2" Grid.Column="1"
+                 ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                 Height="{Binding ElementName=LayoutRoot, Path=ActualHeight}"
+                 Margin="5">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Word}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
 </Window>
 
