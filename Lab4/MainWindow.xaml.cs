@@ -79,14 +79,14 @@ namespace Lab4
             {
                 foreach (string s in words)
                 {
-                    if (LevDistance.Distance(s, word) < max)
+                    if (LevDistance.Distance(s, word) <= max)
                         searchResultLev.Add(new ItemOfList() { Word = s });
                 }
             }
             else {
                 foreach (string s in words)
                 {
-                    if (LevDistance.DistanceDameray(s, word) < max)
+                    if (LevDistance.DistanceDameray(s, word) <= max)
                         searchResultLev.Add(new ItemOfList() { Word = s });
                 }
             }

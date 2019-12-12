@@ -99,6 +99,7 @@ namespace Homework {
             time.Stop();
             for (int i = 0; i < count; i++)
                 result.AddRange(tasks[i].Result);
+
             searchResultLev.Clear();
             foreach (var i in result) {
                 searchResultLev.Add(new ItemOfList { Word = i.word });
@@ -113,16 +114,13 @@ namespace Homework {
             List<ParallelSearchResult> Result = new List<ParallelSearchResult>();
 
             foreach (string str in param.tmpList) {
-                int dist = Lab5.LevDistance.Distance(str.ToUpper(), tmpStr);
-                if (dist <= param.levMaxValue)
-                {
-                    ParallelSearchResult tmp = new ParallelSearchResult()
-                    {
+                int distance = Lab5.LevDistance.Distance(str.ToUpper(), tmpStr);
+                if (distance <= param.levMaxValue) {
+                    ParallelSearchResult tmp = new ParallelSearchResult() {
                         word = str,
-                        dist = dist,
+                        dist = distance,
                         threadCount = param.threadNum
                     };
-
                     Result.Add(tmp);
                 }
             }
